@@ -26,15 +26,15 @@ Inside you will find .json files, divided by categories.
 When you open one, you can see a json array of objects, each defining one object to apply to, for example, a laptop is defined like this:
 ```javascript
 {
-	"filter": "ComputerLaptop", // This will be the search used to find the object in the scene.							  // More info about this later.
-	"sound": "Generic",			// Sound it will make when broken down. See list below.
-	"minutesToHarvest": 45.0,   // Minutes it takes to break the object down.
-	"requireTool":true,			// If true, removes the option to break down by hand.
-	"tools": [					// Array of tools that can be used. See list below.
+	"filter": "ComputerLaptop",		// This will be the search used to find the object in the scene.
+	"sound": "Generic",				// Sound it will make when broken down. 
+	"minutesToHarvest": 45.0,		// Minutes it takes to break the object down.
+	"requireTool":true,				// If true, removes the option to break down by hand.
+	"tools": [						// Array of tools that can be used. 
 		"hacksaw",
 		"hammer"
 	],
-	"yield": [{					// Array of objects that will be yield. See list below.
+	"yield": [{						// Array of objects that will be yield. 
 		"item":"scrap",
 		"num":1
 	}]
