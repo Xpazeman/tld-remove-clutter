@@ -20,7 +20,7 @@ namespace RemoveClutter
 
         public static bool scenePatched = false;
 
-        public static bool verbose = true;
+        public static bool verbose = false;
 
         public static void OnLoad()
         {
@@ -83,6 +83,8 @@ namespace RemoveClutter
             //Clear object list
             itemList.Clear();
 
+            int setupObjects = 0;
+
             //Iterate over obj config list
             foreach (BreakDownDefinition obj in objList)
             {
@@ -105,6 +107,8 @@ namespace RemoveClutter
 
                                 PrepareGameObject(child, obj);
 
+                                setupObjects++;
+
                                 if (verbose)
                                     Debug.Log("[remove-clutter] Added: " + child.name);
                             }
@@ -113,6 +117,8 @@ namespace RemoveClutter
                     }
                 }
             }
+
+            Debug.Log("[remove-clutter] " + setupObjects + " objects setup for removal.");
         }
 
         internal static void PrepareGameObject(GameObject gameObject, BreakDownDefinition objDef)
@@ -254,7 +260,8 @@ namespace RemoveClutter
                 breakDown.m_BreakDownAudio = "Play_HarvestingGeneric";
 
             //Display name
-            breakDown.m_LocalizedDisplayName = new LocalizedString() { m_LocalizationID = "GAMEPLAY_BreakDown" };
+            //breakDown.m_LocalizedDisplayName = new LocalizedString() { m_LocalizationID = "GAMEPLAY_BreakDown" };
+            breakDown.m_LocalizedDisplayName = new LocalizedString() { m_LocalizationID = "Remove "+objDef.filter };
 
             //Required Tools
             if (objDef.requireTool == true && !options.noToolsNeeded)

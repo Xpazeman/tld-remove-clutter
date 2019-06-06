@@ -62,6 +62,8 @@ Or the podium from Milton's church:
 
 You can edit these values and save the file, and next time you start the game, the new values will be used.
 
+You can take a look at the definiton files [here](./src/remove-clutter/definitions)
+
 You can read a simple tutorial on how to create new item definitions [here](./Tutorial.md)
 
 ## Special cases

@@ -68,5 +68,17 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+    <None Include="src\remove-clutter\config.json" />
+    <None Include="src\remove-clutter\definitions\custom.json" />
+    <None Include="src\remove-clutter\definitions\decoration.json" />
+    <None Include="src\remove-clutter\definitions\exterior.json" />
+    <None Include="src\remove-clutter\definitions\industrial.json" />
+    <None Include="src\remove-clutter\definitions\interiors.json" />
+    <None Include="src\remove-clutter\definitions\kitchen.json" />
+    <None Include="src\remove-clutter\definitions\tech.json" />
+    <None Include="Tutorial.md" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
