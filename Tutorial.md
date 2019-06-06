@@ -1,8 +1,9 @@
-﻿# Tutorial: Adding new objects
+﻿# Tutorial: Adding new objects to be removed
 
 ## Creating a new definition
 If you open custom.json inside the definitions folder you can add your own objects in it. 
-** I recommend saving this file with a different name, so you work isn't overwritten when the mod updates. **
+
+**I recommend saving this file with a different name, so you work isn't overwritten when the mod updates.**
 
 Always make sure that all objects are separated by commas, and that the whole list is inside [] brackets, otherwise, the file will not load.
 
@@ -13,7 +14,7 @@ So, for a blank file, you should start with this:
 		"filter": "",
 		"sound": "",
 		"minutesToHarvest": 1,
-		"requireTool":true,	
+		"requireTool":false,	
 		"tools": [],
 		"yield": []
 	}
@@ -29,6 +30,7 @@ For the filter, we only need the name, without prefixes or suffixes, so in this 
 So objects, like paintings or rugs have a letter in the name like: **OBJ_PictureFrameA_LOD0** or **OBJ_RugF_Prefab** (the suffix after the name doesn't matter). In this case we have some options:
 * We can target only that specific rug or painting by using __PictureFrameA__ or __RugF__ as filter.
 * We can target all painting or rugs, simply using __PictureFrame__ and __Rug__
+(See definitions in decorations.json for examples of this)
 
 Basically what filter does is search for every object which name starts with __OBJ_[filter]__, not caring what comes after it.
 
@@ -39,7 +41,7 @@ So, in our example, we would now have this:
 		"filter": "ComputerLaptop",
 		"sound": "",
 		"minutesToHarvest": 1,
-		"requireTool":true,	
+		"requireTool":false,	
 		"tools": [],
 		"yield": []
 	}
@@ -75,7 +77,7 @@ Now, on minutesToHarvest we can set how long it will take to break down, lets sa
 		"filter": "ComputerLaptop",
 		"sound": "Generic",
 		"minutesToHarvest": 45,
-		"requireTool":true,	
+		"requireTool":false,	
 		"tools": [],
 		"yield": []
 	}
@@ -91,7 +93,7 @@ In the tools field we can add which tools we want to allow on the object. These 
 * hatchet
 * hammer
 
-For our example, let's say we can break the laptop down with a hacksaw, but also with a hammer:
+For our example, let's say we can break the laptop down with a hacksaw, also with a hammer, but not by hand:
 
 ```javascript
 [

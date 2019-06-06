@@ -23,7 +23,9 @@ The effects aren't immediate and require a scene load to be applied, going out a
 ## Editting/Adding clutter
 The config files are located in TLD_FOLDER/mods/remove-clutter/definitions.
 Inside you will find .json files, divided by categories.
+
 When you open one, you can see a json array of objects, each defining one object to apply to, for example, a laptop is defined like this:
+
 ```javascript
 {
 	"filter": "ComputerLaptop",		// This will be the search used to find the object in the scene.
@@ -41,6 +43,26 @@ When you open one, you can see a json array of objects, each defining one object
 }
 ```
 
+Or the podium from Milton's church:
+```javascript
+{
+	"filter": "Podium",
+	"sound": "WoodReclaimedNoAxe",
+	"minutesToHarvest": 45.0,
+	"requireTool":true,
+	"tools": [
+		"hatchet"
+	],
+	"yield": [{
+		"item":"wood",
+		"num":3
+	}]
+}
+```
+
 You can edit these values and save the file, and next time you start the game, the new values will be used.
 
 You can read a simple tutorial on how to create new item definitions [here](./Tutorial.md)
+
+## Special cases
+Break down won't be applied to objects that act as container, as bed or if it contains a buffer memory screen. So if you find something that you can't remove and you should, you know why it is.
