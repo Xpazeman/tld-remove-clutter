@@ -1,0 +1,30 @@
+[
+	{
+		"filter": "",
+		"sound": "",
+		"minutesToHarvest": 1,
+		"requireTool":false,
+		"tools": [
+			"hacksaw"
+		],
+		"yield": [{
+			"item":"scrap",
+			"num":4
+		}]
+	},{
+		"filter": "",
+		"sound": "",
+		"minutesToHarvest": 15,
+		"requireTool":true,
+		"tools": [
+			"hacksaw"
+		],
+		"yield": [{
+			"item":"scrap",
+			"num":4
+		},{
+			"item":"cloth",
+			"num":2
+		}]
+	}
+]

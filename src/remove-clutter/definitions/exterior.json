@@ -1,0 +1,64 @@
+[{
+	"filter": "SignStop",
+	"sound": "MetalSaw",
+	"minutesToHarvest": 30.0,
+	"requireTool":true,
+	"tools": [
+		"hacksaw"
+	],
+	"yield": [{
+		"item":"scrap",
+		"num":1
+	}]
+},{
+	"filter": "SignTruck",
+	"sound": "MetalSaw",
+	"minutesToHarvest": 30.0,
+	"requireTool":true,
+	"tools": [
+		"hacksaw"
+	],
+	"yield": [{
+		"item":"scrap",
+		"num":1
+	}]
+},{
+	"filter": "Rake",
+	"sound": "ReclaimedWoodNoAxe",
+	"minutesToHarvest": 25.0,
+	"requireTool":false,
+	"tools": [
+		"hatchet"
+	],
+	"yield": [{
+		"item":"scrap",
+		"num":1
+	},{
+		"item":"tinder",
+		"num":3
+	}]
+},{
+	"filter": "CrossWood",
+	"sound": "WoodReclaimedNoAxe",
+	"minutesToHarvest": 30.0,
+	"requireTool":true,
+	"tools": [
+		"hartchet"
+	],
+	"yield": [{
+		"item":"wood",
+		"num":2
+	}]
+},{
+	"filter": "Gravestone",
+	"sound": "Generic",
+	"minutesToHarvest": 90.0,
+	"requireTool":true,
+	"tools": [
+		"hammer"
+	],
+	"yield": [{
+		"item":"stone",
+		"num":5
+	}]
+}]

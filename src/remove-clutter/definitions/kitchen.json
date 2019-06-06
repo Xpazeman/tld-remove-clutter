@@ -1,0 +1,83 @@
+[{
+	"filter": "DishPlate",
+	"sound": "",
+	"minutesToHarvest": 5.0,
+	"tools": [
+		"hammer"
+	]
+},{
+	"filter": "Cup",
+	"sound": "",
+	"minutesToHarvest": 5.0,
+	"tools": [
+		"hammer"
+	]
+},{
+	"filter": "DishBowl",
+	"sound": "",
+	"minutesToHarvest": 5.0,
+	"tools": [
+		"hammer"
+	]
+},{
+	"filter": "Pitcher",
+	"sound": "",
+	"minutesToHarvest": 5.0,
+	"tools": [
+		"hammer"
+	]
+},{
+	"filter": "WoodSpatula",
+	"sound": "WoodReclaimed",
+	"minutesToHarvest": 5.0,
+	"yield": [{
+		"item":"tinder",
+		"num":1
+	}]
+},{
+	"filter": "CuttingBoard",
+	"sound": "WoodReclaimed",
+	"minutesToHarvest": 10.0,
+	"tools": [
+		"hatchet",
+		"hacksaw"
+	],
+	"yield": [{
+		"item":"tinder",
+		"num":2
+	}]
+},{
+	"filter": "CoffeeMachine",
+	"sound": "Generic",
+	"minutesToHarvest": 30.0,
+	"requireTool":true,
+	"tools": [
+		"hacksaw",
+		"hammer"
+	],
+	"yield": [{
+		"item":"scrap",
+		"num":1
+	}]
+},{
+	"filter": "Blender",
+	"sound": "Generic",
+	"minutesToHarvest": 30.0,
+	"requireTool":true,
+	"tools": [
+		"hacksaw",
+		"hammer"
+	],
+	"yield": [{
+		"item":"scrap",
+		"num":1
+	}]
+},{
+	"filter": "Soap",
+	"sound": "Wool",
+	"minutesToHarvest": 20.0,
+	"tools": [
+		"knife",
+		"hatchet"
+	]
+}]
