@@ -22,17 +22,17 @@ So, for a blank file, you should start with this:
 ```
 ## Filter/Name
 First thing you need to find is the name of the object you want to target, for this I've added **F3** as a debug key, when you press it, it will print on screen and on the console the name of the object under the crosshair.
-Only valid objects are those that start with OBJ, for example, targeting the laptop you'd get something like **OBJ_ComputerLaptop_Prefab**. If you see something that starts with INTERACTIVE_, GEAR_ or STR_, it won't work on those objects.
-Sometimes it might show something like **WoldView**, move around or crouch and try again until it outputs the object. Also, there are some objects that can't be targeted no matter what you do.
+Only valid objects are those that start with OBJ, for example, targeting the laptop you'd get something like **OBJ_ComputerLaptop_Prefab**. If you see something that starts with INTERACTIVE_, GEAR_ or STR_, discard it as it won't work on those objects.
+Sometimes it might show something like **WoldView** when you try to target something. In that case, move around or crouch and try again until it outputs the correct object. Also, keep in mind that there are some objects that can't be targeted no matter what you do.
 
-For the filter, we only need the name, without prefixes or suffixes, so in this case it would be __ComputerLaptop__ what we would put in the filter field.
+For the filter field, we only need the name, without prefixes or suffixes, so in this case it would be _ComputerLaptop_ what we would put in the filter field.
 
 So objects, like paintings or rugs have a letter in the name like: **OBJ_PictureFrameA_LOD0** or **OBJ_RugF_Prefab** (the suffix after the name doesn't matter). In this case we have some options:
-* We can target only that specific rug or painting by using __PictureFrameA__ or __RugF__ as filter.
-* We can target all painting or rugs, simply using __PictureFrame__ and __Rug__
+* We can target only that specific rug or painting by using _PictureFrameA_ or _RugF_ as filter.
+* We can target all painting or rugs, simply using _PictureFrame_ and _Rug_
 (See definitions in decorations.json for examples of this)
 
-Basically what filter does is search for every object which name starts with __OBJ_[filter]__, not caring what comes after it.
+Basically what filter does is search for every object which name starts with **_OBJ_[filter]_**, not caring what comes after it.
 
 So, in our example, we would now have this:
 ```javascript

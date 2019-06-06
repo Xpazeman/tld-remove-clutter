@@ -66,3 +66,6 @@ You can read a simple tutorial on how to create new item definitions [here](./Tu
 
 ## Special cases
 Break down won't be applied to objects that act as container, as bed or if it contains a buffer memory screen. So if you find something that you can't remove and you should, you know why it is.
+
+## Known Issues
+Some objects don't drop down when something underneath is harvested. This is partly due to all objects not being created equal, so, no easy fix for now.
