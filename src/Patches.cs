@@ -1,4 +1,5 @@
-﻿using Harmony;
+﻿using System;
+using Harmony;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,17 +7,6 @@ namespace RemoveClutter
 {
     internal class Patches
     {
-        [HarmonyPatch(typeof(MissionServicesManager), "SceneLoadCompleted")]
-        internal class MissionServicesManager_SceneLoadCompleted
-        {
-            private static void Postfix(MissionServicesManager __instance)
-            {
-                //Patch scene objects after scene load
-                if (!InterfaceManager.IsMainMenuActive())
-                    RemoveClutter.PatchSceneObjects();
-            }
-        }
-
         [HarmonyPatch(typeof(TimeOfDay), "Update")]
         internal class TimeOfDay_Update
         {
@@ -25,20 +15,22 @@ namespace RemoveClutter
                 RCUtils.TimeUpdate();
             }
         }
-        [HarmonyPatch(typeof(BreakDown), "StickToGround")]
-        internal class BreakDown_StickToGround
+
+        [HarmonyPatch(typeof(SaveGameSystem), "LoadSceneData", new Type[] { typeof(string), typeof(string) })]
+        internal class SaveGameSystem_LoadSceneData
         {
-            public static void Prefix(BreakDown __instance, GameObject go)
+            public static void Postfix(SaveGameSystem __instance, string name, string sceneSaveName)
             {
-                //Debug.Log("sticking " + go.name);
-            }
+                if (InterfaceManager.IsMainMenuActive() || GameManager.IsOutDoorsScene(GameManager.m_ActiveScene))
+                    return;
 
-            public static void Postfix()
-            {
-                
-            }
+                string text = SaveGameSlots.LoadDataFromSlot(name, sceneSaveName);
+                SceneSaveGameFormat saveGameFormat = Utils.DeserializeObject<SceneSaveGameFormat>(text);
 
-            
+                RemoveClutter.sceneBreakDownData = saveGameFormat.m_BreakDownObjectsSerialized;
+
+                RemoveClutter.PatchSceneObjects();
+            }
         }
 
     }

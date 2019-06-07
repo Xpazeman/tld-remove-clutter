@@ -59,10 +59,10 @@ namespace RemoveClutter
             }
         }
 
-        internal static void SetLayer(GameObject gameObject)
+        internal static void SetLayer(GameObject gameObject, int layer = vp_Layer.InteractivePropNoCollideGear)
         {
             ChangeLayer changeLayer = gameObject.AddComponent<ChangeLayer>();
-            changeLayer.Layer = vp_Layer.InteractivePropNoCollideGear;
+            changeLayer.Layer = layer;
             changeLayer.Recursively = false;
         }
 

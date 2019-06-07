@@ -18,7 +18,7 @@ namespace RemoveClutter
         public static List<GameObject> itemList = new List<GameObject>();
         public static List<BreakDownDefinition> objList = null;
 
-        public static bool scenePatched = false;
+        public static string sceneBreakDownData = null;
 
         public static bool verbose = false;
 
@@ -119,6 +119,8 @@ namespace RemoveClutter
             }
 
             Debug.Log("[remove-clutter] " + setupObjects + " objects setup for removal.");
+
+            BreakDown.DeserializeAllAdditive(sceneBreakDownData);
         }
 
         internal static void PrepareGameObject(GameObject gameObject, BreakDownDefinition objDef)
@@ -132,28 +134,13 @@ namespace RemoveClutter
                 return;
             }
 
-            
-            //RCUtils.SetLayer(gameObject);
+            AddBreakDownComponent(gameObject, objDef);
 
-            //Get Children with the collider
+            //Check if it has collider, add one if it doesn't
             Collider collider = gameObject.GetComponentInChildren<Collider>();
-            if (collider != null)
+            if (collider == null)
             {
-                AddBreakDownComponent(gameObject, objDef);
-            }
-            else
-            {
-                //if GameObject doesn't have colliders, create a holder object that has one.
-                GameObject trigger = new GameObject("XPZClutterHolder-" + gameObject.name);
-                trigger.transform.parent = gameObject.transform.parent;
-                trigger.transform.position = gameObject.transform.position;
-
-                gameObject.transform.parent = trigger.transform;
-
-                gameObject = trigger;
-
-                AddBreakDownComponent(gameObject, objDef);
-
+                //AddBreakDownComponent(gameObject, objDef);
                 Bounds bounds = renderer.bounds;
 
                 BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
@@ -161,24 +148,22 @@ namespace RemoveClutter
                 boxCollider.center = bounds.center - gameObject.transform.position;
             }
 
-            Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
-            foreach(Renderer renderGO in renderers)
+            //Set children to interactive layer
+            if (gameObject.transform.childCount > 0)
             {
-                AddBreakDownComponent(renderGO.gameObject, objDef);
+                for (int i = 0; i < gameObject.transform.childCount; i++)
+                {
+                    RCUtils.SetLayer(gameObject.transform.GetChild(i).gameObject, vp_Layer.InteractiveProp);
+                }
             }
         }
 
         internal static void AddBreakDownComponent(GameObject gameObject, BreakDownDefinition objDef)
         {
-            if (gameObject.GetComponent<BreakDown>() != null)
-            {
-                GameObject.Destroy(gameObject.GetComponent<BreakDown>());
-            }
-            
-            //gameObject.AddComponent<StickToGround>();
             BreakDown breakDown = gameObject.AddComponent<BreakDown>();
+            BreakDown.m_BreakDownObjects.Add(breakDown);
 
-            RCUtils.SetLayer(gameObject);
+            RCUtils.SetLayer(gameObject, vp_Layer.InteractiveProp);
 
             //Object yields
             if (objDef.yield != null && objDef.yield.Length > 0 && !options.noYield)
