@@ -17,7 +17,7 @@
 		"item":"tinder",
 		"num":2
 	},{
-		"item":"stick",
+		"item":"CrumpledPaper",
 		"num":1
 	}]
 },{
@@ -29,11 +29,35 @@
 		"hatchet"
 	],
 	"yield": [{
-		"item":"wood",
+		"item":"ReclaimedWoodB",
 		"num":2
 	},{
 		"item":"cloth",
 		"num":2
+	}]
+},{
+	"filter": "DoorWood",
+	"sound": "WoodReclaimed",
+	"minutesToHarvest": 90.0,
+	"requireTool":true,
+	"tools": [
+		"hatchet"
+	],
+	"yield": [{
+		"item":"ReclaimedWoodB",
+		"num":6
+	}]
+},{
+	"filter": "FarmhouseDoor",
+	"sound": "WoodReclaimed",
+	"minutesToHarvest": 90.0,
+	"requireTool":true,
+	"tools": [
+		"hatchet"
+	],
+	"yield": [{
+		"item":"ReclaimedWoodB",
+		"num":6
 	}]
 },{
 	"filter": "CoatRack",
@@ -43,7 +67,7 @@
 		"hatchet"
 	],
 	"yield": [{
-		"item":"wood",
+		"item":"ReclaimedWoodB",
 		"num":1
 	}]
 },{
@@ -66,19 +90,8 @@
 		"hacksaw"
 	],
 	"yield": [{
-		"item":"scrap",
+		"item":"ScrapMetal",
 		"num":1
-	}]
-},{
-	"filter": "BoxCardboardOpen",
-	"sound": "Cardboard",
-	"minutesToHarvest": 27.0,
-	"tools": [
-		"knife"
-	],
-	"yield": [{
-		"item":"tinder",
-		"num":3
 	}]
 },{
 	"filter": "LargeCabinetDoor",
@@ -89,7 +102,7 @@
 		"hatchet"
 	],
 	"yield": [{
-		"item":"wood",
+		"item":"ReclaimedWoodB",
 		"num":1
 	}]
 },{
@@ -101,7 +114,7 @@
 		"hatchet"
 	],
 	"yield": [{
-		"item":"wood",
+		"item":"ReclaimedWoodB",
 		"num":1
 	}]
 },{
@@ -113,7 +126,7 @@
 		"hatchet"
 	],
 	"yield": [{
-		"item":"wood",
+		"item":"ReclaimedWoodB",
 		"num":1
 	}]
 },{
@@ -125,7 +138,7 @@
 		"hacksaw"
 	],
 	"yield": [{
-		"item":"scrap",
+		"item":"ScrapMetal",
 		"num":2
 	}]
 },{
@@ -149,7 +162,7 @@
 		"hacksaw"
 	],
 	"yield": [{
-		"item":"scrap",
+		"item":"ScrapMetal",
 		"num":8
 	}]
 },{
@@ -161,7 +174,7 @@
 		"hacksaw"
 	],
 	"yield": [{
-		"item":"scrap",
+		"item":"ScrapMetal",
 		"num":4
 	}]
 },{
@@ -180,7 +193,7 @@
 		"hatchet"
 	],
 	"yield": [{
-		"item":"wood",
+		"item":"ReclaimedWoodB",
 		"num":6
 	}]
 },{
@@ -192,7 +205,7 @@
 		"hatchet"
 	],
 	"yield": [{
-		"item":"wood",
+		"item":"ReclaimedWoodB",
 		"num":16
 	}]
 },{
@@ -204,7 +217,7 @@
 		"hatchet"
 	],
 	"yield": [{
-		"item":"wood",
+		"item":"ReclaimedWoodB",
 		"num":3
 	}]
 },{
@@ -216,7 +229,7 @@
 		"hacksaw"
 	],
 	"yield": [{
-		"item":"scrap",
+		"item":"ScrapMetal",
 		"num":2
 	}]
 },{
@@ -235,7 +248,7 @@
 		"hacksaw"
 	],
 	"yield": [{
-		"item":"scrap",
+		"item":"ScrapMetal",
 		"num":2
 	}]
 },{
@@ -247,7 +260,7 @@
 		"hacksaw"
 	],
 	"yield": [{
-		"item":"scrap",
+		"item":"ScrapMetal",
 		"num":2
 	}]
 },{

@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using ModComponentMapper;
+using System.Text.RegularExpressions;
 
 namespace RemoveClutter
 {
@@ -133,17 +133,17 @@ namespace RemoveClutter
             }
 
             
-            RCUtils.SetLayer(gameObject);
+            //RCUtils.SetLayer(gameObject);
 
             //Get Children with the collider
             Collider collider = gameObject.GetComponentInChildren<Collider>();
             if (collider != null)
             {
                 AddBreakDownComponent(gameObject, objDef);
-                gameObject = collider.gameObject;
             }
             else
             {
+                //if GameObject doesn't have colliders, create a holder object that has one.
                 GameObject trigger = new GameObject("XPZClutterHolder-" + gameObject.name);
                 trigger.transform.parent = gameObject.transform.parent;
                 trigger.transform.position = gameObject.transform.position;
@@ -154,7 +154,6 @@ namespace RemoveClutter
 
                 AddBreakDownComponent(gameObject, objDef);
 
-                //If no collider found, add one to the trigger
                 Bounds bounds = renderer.bounds;
 
                 BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
@@ -166,14 +165,20 @@ namespace RemoveClutter
             foreach(Renderer renderGO in renderers)
             {
                 AddBreakDownComponent(renderGO.gameObject, objDef);
-                //RCUtils.SetLayer(renderGO.gameObject);
             }
         }
 
         internal static void AddBreakDownComponent(GameObject gameObject, BreakDownDefinition objDef)
         {
+            if (gameObject.GetComponent<BreakDown>() != null)
+            {
+                GameObject.Destroy(gameObject.GetComponent<BreakDown>());
+            }
+            
             //gameObject.AddComponent<StickToGround>();
             BreakDown breakDown = gameObject.AddComponent<BreakDown>();
+
+            RCUtils.SetLayer(gameObject);
 
             //Object yields
             if (objDef.yield != null && objDef.yield.Length > 0 && !options.noYield)
@@ -183,33 +188,13 @@ namespace RemoveClutter
 
                 foreach (BreakDownYield yield in objDef.yield)
                 {
-                    if (yield.item == "cloth")
+                    if (yield.item.Trim() != "")
                     {
-                        itemYields.Add(Resources.Load("GEAR_Cloth") as GameObject);
-                    }
-                    else if (yield.item == "scrap")
-                    {
-                        itemYields.Add(Resources.Load("GEAR_ScrapMetal") as GameObject);
-                    }
-                    else if (yield.item == "tinder")
-                    {
-                        itemYields.Add(Resources.Load("GEAR_Tinder") as GameObject);
-                    }
-                    else if (yield.item == "stick")
-                    {
-                        itemYields.Add(Resources.Load("GEAR_Stick") as GameObject);
-                    }
-                    else if (yield.item == "wood")
-                    {
-                        itemYields.Add(Resources.Load("GEAR_ReclaimedWoodB") as GameObject);
-                    }
-                    else if (yield.item == "stone")
-                    {
-                        itemYields.Add(Resources.Load("GEAR_Stone") as GameObject);
-                    }
-                    else if (yield.item == "line")
-                    {
-                        itemYields.Add(Resources.Load("GEAR_Line") as GameObject);
+                        GameObject yieldItem = Resources.Load("GEAR_" + yield.item) as GameObject;
+                        if (yieldItem != null)
+                        {
+                            itemYields.Add(yieldItem);
+                        }
                     }
 
                     numYield.Add(yield.num);
@@ -260,8 +245,20 @@ namespace RemoveClutter
                 breakDown.m_BreakDownAudio = "Play_HarvestingGeneric";
 
             //Display name
-            //breakDown.m_LocalizedDisplayName = new LocalizedString() { m_LocalizationID = "GAMEPLAY_BreakDown" };
-            breakDown.m_LocalizedDisplayName = new LocalizedString() { m_LocalizationID = "Remove "+objDef.filter };
+
+            if (options.showObjectNames)
+            {
+                String rawName = objDef.filter.Replace("_", string.Empty);
+                String[] objWords = Regex.Split(rawName, @"(?<!^)(?=[A-Z])");
+                String objName = String.Join(" ", objWords);
+
+                breakDown.m_LocalizedDisplayName = new LocalizedString() { m_LocalizationID = objName };
+            }
+            else
+            {
+                breakDown.m_LocalizedDisplayName = new LocalizedString() { m_LocalizationID = "GAMEPLAY_BreakDown" };
+            }
+            
 
             //Required Tools
             if (objDef.requireTool == true && !options.noToolsNeeded)

@@ -41,6 +41,7 @@ namespace RemoveClutter
                     {
                         if (child.GetComponent<Container>() == null &&
                             child.GetComponentInChildren<Container>() == null &&
+                            child.GetComponentInParent<Container>() == null &&
                             child.GetComponent<BreakDown>() == null &&
                             child.GetComponent<Bed>() == null &&
                             child.GetComponentInChildren<Bed>() == null &&

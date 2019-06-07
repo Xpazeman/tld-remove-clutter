@@ -7,7 +7,7 @@
 		"hatchet"
 	],
 	"yield": [{
-		"item":"wood",
+		"item":"ReclaimedWoodB",
 		"num":2
 	}]
 },{
@@ -19,7 +19,7 @@
 		"hatchet"
 	],
 	"yield": [{
-		"item":"wood",
+		"item":"ReclaimedWoodB",
 		"num":2
 	}]
 },{
@@ -31,7 +31,7 @@
 		"hatchet"
 	],
 	"yield": [{
-		"item":"wood",
+		"item":"ReclaimedWoodB",
 		"num":2
 	}]
 },{
@@ -43,7 +43,7 @@
 		"hatchet"
 	],
 	"yield": [{
-		"item":"wood",
+		"item":"ReclaimedWoodB",
 		"num":2
 	}]
 },{
@@ -55,7 +55,7 @@
 		"hatchet"
 	],
 	"yield": [{
-		"item":"wood",
+		"item":"ReclaimedWoodB",
 		"num":2
 	}]
 },{
@@ -66,7 +66,7 @@
 		"hatchet"
 	],
 	"yield": [{
-		"item":"wood",
+		"item":"ReclaimedWoodB",
 		"num":2
 	}]
 },{
@@ -100,7 +100,7 @@
 		"hacksaw"
 	],
 	"yield": [{
-		"item":"scrap",
+		"item":"ScrapMetal",
 		"num":1
 	},{
 		"item":"tinder",
@@ -116,6 +116,9 @@
 	"yield": [{
 		"item":"tinder",
 		"num":2
+	},{
+		"item":"RawCohoSalmon",
+		"num":1
 	}]
 },{
 	"filter": "RainbowTroutMount",
@@ -127,6 +130,9 @@
 	"yield": [{
 		"item":"tinder",
 		"num":2
+	},{
+		"item":"RawRainbowTrout",
+		"num":1
 	}]
 },{
 	"filter": "BassMount",
@@ -138,6 +144,9 @@
 	"yield": [{
 		"item":"tinder",
 		"num":2
+	},{
+		"item":"RawSmallMouthBass",
+		"num":1
 	}]
 },{
 	"filter": "EmptySmallMount",
@@ -180,7 +189,7 @@
 		"hatchet"
 	],
 	"yield": [{
-		"item":"wood",
+		"item":"ReclaimedWoodB",
 		"num":1
 	}]
 },{
@@ -268,7 +277,7 @@
 		"num":6
 	}]
 },{
-	"filter": "GrandfatherClock",
+	"filter": "GrandfatherClock_",
 	"sound": "WoodReclaimed",
 	"minutesToHarvest": 90.0,
 	"requireTool":true,
@@ -276,7 +285,7 @@
 		"hatchet"
 	],
 	"yield": [{
-		"item":"wood",
+		"item":"ReclaimedWoodB",
 		"num":4
 	}]
 },{
@@ -291,7 +300,7 @@
 		"item":"tinder",
 		"num":2
 	},{
-		"item":"scrap",
+		"item":"ScrapMetal",
 		"num":1
 	}]
 }]

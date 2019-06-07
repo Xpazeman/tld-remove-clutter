@@ -1,6 +1,8 @@
 # Remove Clutter
 This mods allows you to remove most of the clutter in TLD. In reality it's a system to adds the break down functionality to almost any object through the config files. It's possible to edit the added items properties (which tool can be used, if tools are required, how much time it takes, what sound it plays and what objects it yields), and also you can add your own.
 
+This mod is compatible with [Home-Improvement](https://github.com/WulfMarius/Home-Improvement) by Wulfmarius, and in fact, having both installed is extremely recommended. Also works on it's own.
+
 ## Important Notice
 Before you can use this, or any other mod, make sure of the following:
 * You have The Long Dark **version 1.49+** installed.
@@ -61,13 +63,14 @@ Or the podium from Milton's church:
 ```
 
 You can edit these values and save the file, and next time you start the game, the new values will be used.
+Definition files are loaded in alphabetical order, so adding for example a 0 or something like that at the start of the custom.json file will make your custom definitions load before the mod ones. Also, since definitions don't overwrite, if you redefine something in your custom file, it will override the mod's default. This is helpful so when the mod updates your edits are kept (remember to change the custom.json file name)
 
 You can take a look at the definiton files [here](./src/remove-clutter/definitions)
 
 You can read a simple tutorial on how to create new item definitions [here](./Tutorial.md)
 
 ## Special cases
-Break down won't be applied to objects that act as container, as bed or if it contains a buffer memory screen. So if you find something that you can't remove and you should, you know why it is.
+Break down won't be applied to objects that act as container, bed or if it contains a buffer memory screen. So if you find something that you can't remove but it is defined, that might be the reason.
 
 ## Known Issues
-Some objects don't drop down when something underneath is harvested. This is partly due to all objects not being created equal, so, no easy fix for now.
+Some objects don't drop down to the closest surface when something underneath is harvested. This is partly due to all objects not being created equal, so will be reviewed case by case. Best fix for this is... starting with the topmost objects.

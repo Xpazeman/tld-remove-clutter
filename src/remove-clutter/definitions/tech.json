@@ -8,7 +8,7 @@
 		"hammer"
 	],
 	"yield": [{
-		"item":"scrap",
+		"item":"ScrapMetal",
 		"num":1
 	}]
 },{
@@ -21,7 +21,7 @@
 		"hammer"
 	],
 	"yield": [{
-		"item":"scrap",
+		"item":"ScrapMetal",
 		"num":1
 	}]
 },{
@@ -34,7 +34,7 @@
 		"hammer"
 	],
 	"yield": [{
-		"item":"scrap",
+		"item":"ScrapMetal",
 		"num":1
 	}]
 },{
@@ -47,7 +47,7 @@
 		"hammer"
 	],
 	"yield": [{
-		"item":"scrap",
+		"item":"ScrapMetal",
 		"num":1
 	}]
 },{
@@ -60,7 +60,7 @@
 		"hammer"
 	],
 	"yield": [{
-		"item":"scrap",
+		"item":"ScrapMetal",
 		"num":1
 	}]
 },{

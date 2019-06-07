@@ -1,0 +1,13 @@
+[{
+	"filter": "",
+	"sound": "",
+	"minutesToHarvest": 1,
+	"requireTool":false,
+	"tools": [
+		"hacksaw"
+	],
+	"yield": [{
+		"item":"scrap",
+		"num":4
+	}]
+}]

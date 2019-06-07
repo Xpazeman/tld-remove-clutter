@@ -10,7 +10,7 @@ namespace RemoveClutter
         public bool noToolsNeeded = false;
         public bool fastBreakDown = false;
         public bool noYield = false;
-        //public bool preventBufferRemove = true;
+        public bool showObjectNames = true;
     }
 
     internal class RemoveClutterSettings : ModSettingsBase
@@ -29,9 +29,9 @@ namespace RemoveClutter
         [Description("If active, clutter will not yield any objects when harvested.")]
         public bool noYield = false;
 
-        /*[Name("Prevent Buffer Memories removal")]
-        [Description("If active, you won't be able to remove computers that contain Buffer Memories.")]
-        public bool preventBufferRemove = true;*/
+        [Name("Show object names (no translation)")]
+        [Description("If deactivated, mod will show a generic localized string, if activated, it will show the original object name without translation.")]
+        public bool showObjectNames = true;
 
         internal RemoveClutterSettings()
         {
@@ -44,7 +44,7 @@ namespace RemoveClutter
                 noToolsNeeded = setOptions.noToolsNeeded;
                 fastBreakDown = setOptions.fastBreakDown;
                 noYield = setOptions.noYield;
-                //preventBufferRemove = setOptions.preventBufferRemove;
+                showObjectNames = setOptions.showObjectNames;
 
             }
         }
@@ -54,7 +54,7 @@ namespace RemoveClutter
             setOptions.noToolsNeeded = noToolsNeeded;
             setOptions.fastBreakDown = fastBreakDown;
             setOptions.noYield = noYield;
-            //setOptions.preventBufferRemove = preventBufferRemove;
+            setOptions.showObjectNames = showObjectNames;
 
             string jsonOpts = FastJson.Serialize(setOptions);
 

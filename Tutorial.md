@@ -114,14 +114,17 @@ For our example, let's say we can break the laptop down with a hacksaw, also wit
 ## Yields
 Each type of yield should be their own object in the array, with a field for the object, and another one for the number of items it yields.
 
-Possible values for yields are:
-* cloth
-* scrap
-* tinder
-* stick
-* wood - (this is reclaimed wood)
-* stone
-* line
+You can make the item yield any other GEAR item you want. For this, you need the name of the object you want to spawn, **minus the GEAR_ prefix**. Some examples:
+* ScrapMetal
+* ReclaimedWoodB
+* Stick
+* Line
+
+You can use the dev console for a list of items, or use F3 on items in game to see their name. Wulfmarius has a list, and although it's not updated to latest version, it's good enough for most situations https://github.com/WulfMarius/ModComponent/wiki/Item-Names
+
+Yes, you can make a poster yield beefjerky when harvested if you want to.
+
+If any mod adds new GearItems, you can use them too. For example, HomeImprovement adds GEAR_CumpledPaper, so you can use CumpledPaper as a yield item type. If no object is found with that name, it simply won't spawn.
 
 In the case of our laptop, let's make it give us 2 pieces of scrap, and why not, a piece of cloth (just for tutorial purposes)
 
@@ -139,10 +142,10 @@ So now our object definition would finally look like this:
 		],
 		"yield": [
 			{
-				"item":"scrap",
+				"item":"ScrapMetal",
 				"num": 2
 			},{
-				"item":"cloth",
+				"item":"Cloth",
 				"num": 1
 			}	
 		]
@@ -166,7 +169,7 @@ Now, if we wanted to add more items, we can copy the one we made and modify from
 		],
 		"yield": [
 			{
-				"item":"scrap",
+				"item":"ScrapMetal",
 				"num": 2
 			},{
 				"item":"cloth",
@@ -186,7 +189,7 @@ Now, if we wanted to add more items, we can copy the one we made and modify from
 		],
 		"yield": [
 			{
-				"item":"scrap",
+				"item":"ScrapMetal",
 				"num": 2
 			},{
 				"item":"cloth",
@@ -199,3 +202,4 @@ Now, if we wanted to add more items, we can copy the one we made and modify from
 
 In order to validate your file, or if it fails and you're not sure why, you can use this tool to debug it:
 https://jsonlint.com/
+
