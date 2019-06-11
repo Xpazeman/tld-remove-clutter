@@ -22,6 +22,11 @@ namespace RemoveClutter
 
         public static bool verbose = false;
 
+        public static List<string> notReallyOutdoors = new List<string>
+        {
+            "DamTransitionZone"
+        };
+
         public static void OnLoad()
         {
             Debug.Log("[remove-clutter] Version " + Assembly.GetExecutingAssembly().GetName().Version);
@@ -257,19 +262,19 @@ namespace RemoveClutter
 
                 foreach (String tool in objDef.tools)
                 {
-                    if (tool == "knife")
+                    if (tool.ToLower() == "knife")
                     {
                         itemTools.Add(Resources.Load("GEAR_Knife") as GameObject);
                     }
-                    else if (tool == "hacksaw")
+                    else if (tool.ToLower() == "hacksaw")
                     {
                         itemTools.Add(Resources.Load("GEAR_Hacksaw") as GameObject);
                     }
-                    else if (tool == "hatchet")
+                    else if (tool.ToLower() == "hatchet")
                     {
                         itemTools.Add(Resources.Load("GEAR_Hatchet") as GameObject);
                     }
-                    else if (tool == "hammer")
+                    else if (tool.ToLower() == "hammer")
                     {
                         itemTools.Add(Resources.Load("GEAR_Hammer") as GameObject);
                     }

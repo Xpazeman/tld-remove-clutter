@@ -25,6 +25,8 @@ First thing you need to find is the name of the object you want to target, for t
 Only valid objects are those that start with OBJ, for example, targeting the laptop you'd get something like **OBJ_ComputerLaptop_Prefab**. If you see something that starts with INTERACTIVE_, GEAR_ or STR_, discard it as it won't work on those objects.
 Sometimes it might show something like **WoldView** when you try to target something. In that case, move around or crouch and try again until it outputs the correct object. Also, keep in mind that there are some objects that can't be targeted no matter what you do.
 
+**Keep in mind that the mod is disabled outside for performance reasons, so even if you add objects, they won't be breakable.**
+
 For the filter field, we only need the name, without prefixes or suffixes, so in this case it would be _ComputerLaptop_ what we would put in the filter field.
 
 So objects, like paintings or rugs have a letter in the name like: **OBJ_PictureFrameA_LOD0** or **OBJ_RugF_Prefab** (the suffix after the name doesn't matter). In this case we have some options:
@@ -70,6 +72,8 @@ These are the possible values we can set this to:
 
 For our example, we will use the Generic one.
 
+The minutesToHarvest field defines how long it takes to harvest the item by hand, if you use a tool its modifier will be applied to this value.
+
 Now, on minutesToHarvest we can set how long it will take to break down, lets say 45 minutes, so now we would have:
 ```javascript
 [
@@ -85,15 +89,15 @@ Now, on minutesToHarvest we can set how long it will take to break down, lets sa
 ```
 
 ## Tools
-The field requireTool can be set to false if we want to be able to harvest by hand, and to true if a tool is needed.
+The field requireTool can be set to false if we want to be able to harvest by hand, and to true if a tool is needed, chosen tool will affect total harvest time.
 
-In the tools field we can add which tools we want to allow on the object. These are the possible values:
-* knife
-* hacksaw
-* hatchet
-* hammer
+In the tools field we can add which tools we want to allow on the object. These are the possible values along with the reduction they apply):
+* knife - 0.4 reduction, 60 minutes become 36
+* hacksaw - No reduction
+* hatchet - 0.5 reduction, 60 minutes become 30
+* hammer - 0.25 reduction, 60 minutes become 45
 
-For our example, let's say we can break the laptop down with a hacksaw, also with a hammer, but not by hand:
+For our example, let's say we can break the laptop down with a hacksaw (will take 45 minutes when selected), also with a hammer (will take 34 minutes when selected), but not by hand:
 
 ```javascript
 [
