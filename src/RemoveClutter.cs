@@ -106,7 +106,7 @@ namespace RemoveClutter
                     {
                         foreach (GameObject child in result)
                         {
-                            if (child != null && !child.name.Contains("xpzclutter"))
+                            if (child != null && !child.name.Contains("xpzclutter") && child.GetComponent("RepairableContainer") == null)
                             {
                                 child.name += "_xpzclutter";
 
@@ -117,7 +117,6 @@ namespace RemoveClutter
                                 if (verbose)
                                     Debug.Log("[remove-clutter] Added: " + child.name);
                             }
-
                         }
                     }
                 }
