@@ -37,6 +37,15 @@
 		"hacksaw"
 	]
 },{
+	"filter": "Paintbrush",
+	"sound": "ReclaimewWoodNoAxe",
+	"minutesToHarvest": 15.0,
+	"requireTool":true,
+	"yield": [{
+		"item":"tinder",
+		"num":1
+	}]
+},{
 	"filter": "MetalPipePile",
 	"sound": "MetalSaw",
 	"minutesToHarvest": 60.0,
@@ -84,6 +93,30 @@
 	"yield": [{
 		"item":"ScrapMetal",
 		"num":2
+	}]
+},{
+	"filter": "IndustrialLamp",
+	"sound": "MetalSaw",
+	"minutesToHarvest": 40.0,
+	"requireTool":true,
+	"tools": [
+		"hacksaw"
+	],
+	"yield": [{
+		"item":"ScrapMetal",
+		"num":2
+	}]
+},{
+	"filter": "MetalTroughA",
+	"sound": "MetalSaw",
+	"minutesToHarvest": 80.0,
+	"requireTool":true,
+	"tools": [
+		"hacksaw"
+	],
+	"yield": [{
+		"item":"ScrapMetal",
+		"num":3
 	}]
 },{
 	"filter": "GearWheel",
@@ -240,5 +273,41 @@
 	"yield": [{
 		"item":"ScrapMetal",
 		"num":1
+	}]
+},{
+	"filter": "CarTruckRightDoor",
+	"sound": "MetalSaw",
+	"minutesToHarvest": 50.0,
+	"requireTool":true,
+	"tools": [
+		"hacksaw"
+	],
+	"yield": [{
+		"item":"ScrapMetal",
+		"num":3
+	}]
+},{
+	"filter": "CarTruckLeftDoor",
+	"sound": "MetalSaw",
+	"minutesToHarvest": 50.0,
+	"requireTool":true,
+	"tools": [
+		"hacksaw"
+	],
+	"yield": [{
+		"item":"ScrapMetal",
+		"num":3
+	}]
+},{
+	"filter": "CarTruckHood",
+	"sound": "MetalSaw",
+	"minutesToHarvest": 50.0,
+	"requireTool":true,
+	"tools": [
+		"hacksaw"
+	],
+	"yield": [{
+		"item":"ScrapMetal",
+		"num":3
 	}]
 }]

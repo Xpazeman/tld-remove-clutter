@@ -103,4 +103,17 @@
 		"hacksaw",
 		"hammer"
 	]
+},{
+	"filter": "StereoSpeaker",
+	"sound": "Generic",
+	"minutesToHarvest": 45.0,
+	"requireTool":true,
+	"tools": [
+		"hacksaw",
+		"hammer"
+	],
+	"yield": [{
+		"item":"ScrapMetal",
+		"num":1
+	}]
 }]
