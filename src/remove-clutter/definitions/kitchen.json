@@ -20,6 +20,13 @@
 		"hammer"
 	]
 },{
+	"filter": "Basin",
+	"sound": "",
+	"minutesToHarvest": 5.0,
+	"tools": [
+		"hammer"
+	]
+},{
 	"filter": "Pitcher",
 	"sound": "",
 	"minutesToHarvest": 5.0,
