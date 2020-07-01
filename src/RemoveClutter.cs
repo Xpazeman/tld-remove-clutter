@@ -4,16 +4,14 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using System.Text.RegularExpressions;
+using MelonLoader;
+using MelonLoader.TinyJSON;
 
 namespace RemoveClutter
 {
-    internal class RemoveClutter
+    internal class RemoveClutter : MelonMod
     {
-        public static string modsFolder;
-        public static string modDataFolder;
-        public static string settingsFile = "config.json";
-
-        public static RemoveClutterOptions options;
+        private static readonly string MODS_FOLDER_PATH = Path.GetFullPath(typeof(MelonMod).Assembly.Location + @"\..\..\Mods\remove-clutter");
 
         public static List<GameObject> itemList = new List<GameObject>();
         public static List<BreakDownDefinition> objList = null;
@@ -27,23 +25,20 @@ namespace RemoveClutter
             "DamTransitionZone"
         };
 
-        public static void OnLoad()
+        public override void OnApplicationStart()
         {
             Debug.Log("[remove-clutter] Version " + Assembly.GetExecutingAssembly().GetName().Version);
 
-            modsFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            modDataFolder = Path.Combine(modsFolder, "remove-clutter");
+            UnhollowerRuntimeLib.ClassInjector.RegisterTypeInIl2Cpp<ChangeLayer>();
 
-            RemoveClutterSettings settings = new RemoveClutterSettings();
-            settings.AddToModSettings("Remove Clutter Settings");
-            options = settings.setOptions;
+            Settings.OnLoad();
 
             LoadBreakDownDefinitions();
         }
 
         internal static void LoadBreakDownDefinitions()
         {
-            String defsPath = Path.Combine(modDataFolder, "definitions");
+            String defsPath = Path.Combine(MODS_FOLDER_PATH, "definitions");
             string[] defFiles = Directory.GetFiles(defsPath, "*.json");
 
             if (defFiles.Length > 0)
@@ -57,7 +52,8 @@ namespace RemoveClutter
 
                     try
                     {
-                        fileObjs = FastJson.Deserialize<List<BreakDownDefinition>>(data);
+                        fileObjs = JSON.Load(data).Make<List<BreakDownDefinition>>();
+                        
 
                         objList.AddRange(fileObjs);
 
@@ -132,16 +128,35 @@ namespace RemoveClutter
             //Object preparer adapted from WulfMarius' Home-Improvement
             //github.com/WulfMarius/Home-Improvement/blob/master/VisualStudio/src/preparer/BreakDownPapers.cs
 
+            LODGroup lodObject = gameObject.GetComponent<LODGroup>();
+            
+            if (lodObject == null)
+            {
+                lodObject = gameObject.GetComponentInChildren<LODGroup>();
+            }
+
+            if (lodObject != null)
+            {
+                gameObject = lodObject.gameObject;
+            }
+
             Renderer renderer = Utils.GetLargestBoundsRenderer(gameObject);
+            
             if (renderer == null)
             {
                 return;
             }
 
             AddBreakDownComponent(gameObject, objDef);
-
+            
             //Check if it has collider, add one if it doesn't
-            Collider collider = gameObject.GetComponentInChildren<Collider>();
+            Collider collider = gameObject.GetComponent<Collider>();
+            
+            if (collider == null)
+            {
+                collider = gameObject.GetComponentInChildren<Collider>();
+            }
+
             if (collider == null)
             {
                 //AddBreakDownComponent(gameObject, objDef);
@@ -170,7 +185,7 @@ namespace RemoveClutter
             RCUtils.SetLayer(gameObject, vp_Layer.InteractiveProp);
 
             //Object yields
-            if (objDef.yield != null && objDef.yield.Length > 0 && !options.noYield)
+            if (objDef.yield != null && objDef.yield.Length > 0 && Settings.options.objectYields)
             {
                 List<GameObject> itemYields = new List<GameObject>();
                 List<int> numYield = new List<int>();
@@ -179,14 +194,22 @@ namespace RemoveClutter
                 {
                     if (yield.item.Trim() != "")
                     {
-                        GameObject yieldItem = Resources.Load("GEAR_" + yield.item) as GameObject;
-                        if (yieldItem != null)
+                        //GameObject yieldItem = Resources.Load("GEAR_" + yield.item).Cast<GameObject>();
+
+                        GameObject yieldItem = null;
+                        UnityEngine.Object yieldItemObj = Resources.Load("GEAR_" + yield.item);
+
+                        if (yieldItemObj != null)
                         {
+                            yieldItem = yieldItemObj.Cast<GameObject>();
                             itemYields.Add(yieldItem);
+                            numYield.Add(yield.num);
+                        }
+                        else
+                        {
+                            Debug.Log("[remove-clutter] Yield  GEAR_" + yield.item + " couldn't be loaded.");
                         }
                     }
-
-                    numYield.Add(yield.num);
                 }
 
                 breakDown.m_YieldObject = itemYields.ToArray();
@@ -200,7 +223,7 @@ namespace RemoveClutter
 
 
             //Time to harvest
-            if (objDef.minutesToHarvest > 0 && !options.fastBreakDown)
+            if (objDef.minutesToHarvest > 0 && !Settings.options.fastBreakDown)
                 breakDown.m_TimeCostHours = objDef.minutesToHarvest / 60;
             else
                 breakDown.m_TimeCostHours = 1f / 60;
@@ -235,7 +258,7 @@ namespace RemoveClutter
 
             //Display name
 
-            if (options.showObjectNames)
+            if (Settings.options.showObjectNames)
             {
                 String rawName = objDef.filter.Replace("_", string.Empty);
                 String[] objWords = Regex.Split(rawName, @"(?<!^)(?=[A-Z])");
@@ -250,41 +273,66 @@ namespace RemoveClutter
             
 
             //Required Tools
-            if (objDef.requireTool == true && !options.noToolsNeeded)
+            if (objDef.requireTool == true && Settings.options.toolsNeeded)
             {
                 breakDown.m_RequiresTool = true;
             }
 
-            if (objDef.tools != null && objDef.tools.Length > 0 && !options.noToolsNeeded)
+            if (objDef.tools != null && objDef.tools.Length > 0 && Settings.options.toolsNeeded)
             {
-                List<GameObject> itemTools = new List<GameObject>();
+                Il2CppSystem.Collections.Generic.List<GameObject> itemTools = new Il2CppSystem.Collections.Generic.List<GameObject>();
 
                 foreach (String tool in objDef.tools)
                 {
+                    GameObject selectedTool = null;
+
                     if (tool.ToLower() == "knife")
                     {
-                        itemTools.Add(Resources.Load("GEAR_Knife") as GameObject);
+                        selectedTool = Resources.Load("GEAR_Knife").Cast<GameObject>();
                     }
                     else if (tool.ToLower() == "hacksaw")
                     {
-                        itemTools.Add(Resources.Load("GEAR_Hacksaw") as GameObject);
+                        selectedTool = Resources.Load("GEAR_Hacksaw").Cast<GameObject>();
                     }
                     else if (tool.ToLower() == "hatchet")
                     {
-                        itemTools.Add(Resources.Load("GEAR_Hatchet") as GameObject);
+                        selectedTool = Resources.Load("GEAR_Hatchet").Cast<GameObject>();
                     }
                     else if (tool.ToLower() == "hammer")
                     {
-                        itemTools.Add(Resources.Load("GEAR_Hammer") as GameObject);
+                        selectedTool = Resources.Load("GEAR_Hammer").Cast<GameObject>();
                     }
+
+                    if (selectedTool != null)
+                    {
+                        itemTools.Add(selectedTool);
+                    }
+                    else
+                    {
+                        Debug.Log("[remove-clutter] Tool " + tool + " couldn't be loaded or doesn't exist.");
+                    }
+                    
                 }
 
-                breakDown.m_UsableTools = itemTools.ToArray();
+                UnhollowerBaseLib.Il2CppReferenceArray<GameObject> toolsArray = new UnhollowerBaseLib.Il2CppReferenceArray<GameObject>(itemTools.ToArray());
+
+                if(toolsArray.Length > 0)
+                {
+                    breakDown.m_UsableTools = toolsArray;
+                }
+                else
+                {
+                    Debug.Log("[remove-clutter] Tools array is empty.");
+                    breakDown.m_RequiresTool = false;
+                    breakDown.m_UsableTools = new GameObject[0];
+                }
             }
             else
             {
                 breakDown.m_UsableTools = new GameObject[0];
             }
+
+            
         }
     }
 }

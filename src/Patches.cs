@@ -2,14 +2,14 @@
 using Harmony;
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 
 namespace RemoveClutter
 {
     internal class Patches
     {
-        [HarmonyPatch(typeof(TimeOfDay), "Update")]
-        internal class TimeOfDay_Update
+        //[HarmonyPatch(typeof(TimeOfDay), "Update")]
+        [HarmonyPatch(typeof(TimeOfDay), "UpdateUniStormDayLength")]
+        internal class TimeOfDay_UpdateUniStormDayLength
         {
             public static void Postfix(TimeOfDay __instance)
             {
@@ -44,7 +44,7 @@ namespace RemoveClutter
         {
             public static void Prefix(BreakDown __instance)
             {
-                List<BreakDown> okItems = new List<BreakDown>();
+                Il2CppSystem.Collections.Generic.List<BreakDown> okItems = new Il2CppSystem.Collections.Generic.List<BreakDown>();
 
                 for (int i = 0; i < BreakDown.m_BreakDownObjects.Count; i++)
                 {
@@ -58,5 +58,33 @@ namespace RemoveClutter
                 BreakDown.m_BreakDownObjects = okItems;
             }
         }
+
+        /*[HarmonyPatch(typeof(PlayerManager), "InteractiveObjectsProcessAltFire")]
+        internal class PlayerManager_InteractiveObjectsProcessAltFire
+        {
+            public static bool Prefix(PlayerManager __instance)
+            {
+                var gameObject = __instance.m_InteractiveObjectUnderCrosshair;
+
+                if (gameObject.name.Contains("xpzclutter"))
+                {
+                    //BetterPlacing.PreparePlacableFurniture(gameObject);
+
+                    if (gameObject.GetComponent<BreakDown>() != null)
+                    {
+                        __instance.StartPlaceMesh(gameObject, 5f, PlaceMeshFlags.None);
+                    }else if (gameObject.GetComponentInChildren<BreakDown>() != null)
+                    {
+                        GameObject lod = gameObject.GetComponentInChildren<BreakDown>().gameObject;
+                        __instance.StartPlaceMesh(lod, 5f, PlaceMeshFlags.None);
+                    }
+                    
+
+                    return false;
+                }
+
+                return true;
+            }
+        }*/
     }
 }

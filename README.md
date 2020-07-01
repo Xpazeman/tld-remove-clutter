@@ -1,29 +1,22 @@
 # Remove Clutter
-This mods allows you to remove most of the clutter in TLD. In reality it's a system to adds the break down functionality to almost any object through the config files. It's possible to edit the added items properties (which tool can be used, if tools are required, how much time it takes, what sound it plays and what objects it yields), and also you can add your own.
+This mods allows you to remove most of the clutter in TLD. In reality it's a system to add the break down functionality to almost any object through config files. It's possible to edit the added items properties (which tool can be used, if tools are required, how much time it takes, what sound it plays and what objects it yields), and also you can add your own.
 
-This mod is compatible with [Home-Improvement](https://github.com/WulfMarius/Home-Improvement) by Wulfmarius, and in fact, having both installed is extremely recommended. Also works on it's own.
-
-## Important Notice
-Before you can use this, or any other mod, make sure of the following:
-* You have The Long Dark **version 1.49+** installed.
-* You have downloaded the latest version of **ModLoader** (https://github.com/zeobviouslyfakeacc/ModLoaderInstaller/releases/tag/v1.5) and patched your TLD game.
-
-Also, in particular to this mod, you'll need **ModSettings 1.5** and **ModComponent 3.2.1** installed in order for the mod to work. You can get it in two ways:
-* Using Wulfmarius' Mod Installer, it will download automatically as they are dependencies
-* Installed manually from https://github.com/zeobviouslyfakeacc/ModSettings/releases/tag/v1.5 and https://github.com/WulfMarius/ModComponent/releases/tag/3.2.1 respectively
-
-#### If there's red text on the screen when the game loads, most probable cause it's that you don't have these dependencies installed
+## Installing the mod
+* If you haven't done so already, install MelonLoader by downloading and running [MelonLoader.Installer.exe](https://github.com/HerpDerpinstine/MelonLoader/releases/latest/download/MelonLoader.Installer.exe)
+* Download the latest version of RemoveClutter.zip from the releases page
+* Extract RemoveClutter.zip into the Mods folder in your TLD install directory, you should have a folder name remove-clutter and RemoveClutter.dll in there
 
 ## Mod Options
-In the Mod Options menu, you have three options:
-* **Tools Not Required**: Removes tool requirement for all objects added through the mod.
-* **Fast Breakdown**: All objects added through the mod will take 1 minute to break down.
-* **No Objects Yield**: Object added through the mod will not yield anything when broken down.
+In the Mod Options menu, you have four options:
+* **Tools Required**: If disabled, removes tool requirement for all objects added through the mod.
+* **Fast Breakdown**: All objects added through the mod will only take 1 minute to break down.
+* **Objects Yield**: If disabled, object added through the mod will not yield anything when broken down.
+* **Show object names**: Shows the object name instead of a generic 'Break Down' text when hovering. These names aren't translated.
 
 The effects aren't immediate and require a scene load to be applied, going out and back inside will apply them.
 
 ## Editting/Adding clutter
-The config files are located in TLD_FOLDER/mods/remove-clutter/definitions.
+The config files are located in TLD_FOLDER/Mods/remove-clutter/definitions.
 Inside you will find .json files, divided by categories.
 
 When you open one, you can see a json array of objects, each defining one object to apply to, for example, a laptop is defined like this:
@@ -70,7 +63,8 @@ You can take a look at the definiton files [here](./src/remove-clutter/definitio
 You can read a simple tutorial on how to create new item definitions [here](./Tutorial.md)
 
 ## Special cases
-Break down won't be applied to objects that act as container, bed or if it contains a buffer memory screen. So if you find something that you can't remove but it is defined, that might be the reason.
+Break down won't be applied to objects that act as container, bed or if it contains a buffer memory screen. So if you find something that you can't remove but it is defined in the JSON files, that might be the reason.
+Due to performance reasons, the mod will only work with interiors.
 
 ## Known Issues
 Some objects don't drop down to the closest surface when something underneath is harvested. This is partly due to all objects not being created equal, so will be reviewed case by case. Best fix for this is... starting with the topmost objects.

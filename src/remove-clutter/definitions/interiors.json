@@ -3,6 +3,22 @@
 	"sound": "Paper",
 	"minutesToHarvest": 1.0
 },{
+	"filter": "PaperDebris",
+	"sound": "Paper",
+	"minutesToHarvest": 1.0
+},{
+	"filter": "PaperDeco",
+	"sound": "Paper",
+	"minutesToHarvest": 1.0
+},{
+	"filter": "WallDecoPatterned",
+	"sound": "Paper",
+	"minutesToHarvest": 1.0
+},{
+	"filter": "CalendarDeco",
+	"sound": "Paper",
+	"minutesToHarvest": 1.0
+},{
 	"filter": "Cobweb",
 	"sound": "Wool",
 	"minutesToHarvest": 1.0

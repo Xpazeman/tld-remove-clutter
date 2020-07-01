@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using ModComponentMapper;
 
 namespace RemoveClutter
 {
@@ -59,7 +58,7 @@ namespace RemoveClutter
             }
         }
 
-        internal static void SetLayer(GameObject gameObject, int layer = vp_Layer.InteractivePropNoCollideGear)
+        internal static void SetLayer(GameObject gameObject, int layer)
         {
             ChangeLayer changeLayer = gameObject.AddComponent<ChangeLayer>();
             changeLayer.Layer = layer;
@@ -90,6 +89,35 @@ namespace RemoveClutter
             Physics.Raycast(start, direction, out RaycastHit result, float.PositiveInfinity);
 
             return result;
+        }
+
+        internal static GameObject GetFurnitureRoot(GameObject gameObject)
+        {
+            if (gameObject.GetComponent<LODGroup>() != null)
+            {
+                return gameObject;
+            }
+
+            return GetFurnitureRoot(gameObject.transform.parent.gameObject);
+        }
+    }
+
+    public class ChangeLayer : MonoBehaviour
+    {
+        public int Layer;
+        public bool Recursively;
+
+        public ChangeLayer(IntPtr intPtr) : base(intPtr) { }
+
+        public void Start()
+        {
+            this.Invoke("SetLayer", 1);
+        }
+
+        internal void SetLayer()
+        {
+            vp_Layer.Set(this.gameObject, Layer, Recursively);
+            Destroy(this);
         }
     }
 }
