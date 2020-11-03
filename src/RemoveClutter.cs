@@ -1,4 +1,5 @@
 ﻿using System;
+using Harmony;
 using System.Reflection;
 using System.Collections.Generic;
 using System.IO;
@@ -118,9 +119,47 @@ namespace RemoveClutter
                 }
             }
 
+
+
             Debug.Log("[remove-clutter] " + setupObjects + " objects setup for removal.");
 
             BreakDown.DeserializeAllAdditive(sceneBreakDownData);
+        }
+
+        internal static void PatchSceneDecals()
+        {
+            GameObject[] rObjs = RCUtils.GetRootObjects().ToArray();
+
+            foreach (GameObject rootObj in rObjs)
+            {
+                MeshRenderer childRenderer = rootObj.GetComponent<MeshRenderer>();
+                MeshRenderer[] allRenderers = rootObj.GetComponentsInChildren<MeshRenderer>();
+                allRenderers.Add(childRenderer);
+
+                foreach (MeshRenderer renderer in allRenderers)
+                {
+                    if (renderer.gameObject.name.ToLower().Contains("decal"))
+                    {
+                        renderer.receiveShadows = true;
+                        qd_Decal decal = renderer.GetComponent<qd_Decal>();
+                        //Debug.Log("Decal " + renderer.gameObject.name + " layer" + decal.m_Layer + " texture:"+ decal.texture.name);
+                        if (decal != null && (decal.texture.name.StartsWith("FX_DebrisPaper") || decal.texture.name.StartsWith("FX_DebrisMail") || decal.texture.name.StartsWith("FX_DebriPaper")))
+                        {
+                            
+                            BreakDownDefinition bdDef = new BreakDownDefinition
+                            {
+                                filter = "Paper",
+                                minutesToHarvest = 1f,
+                                sound = "Paper"
+                            };
+
+                            PrepareGameObject(renderer.gameObject, bdDef);
+                        }
+
+                        continue;
+                    }
+                }
+            }
         }
 
         internal static void PrepareGameObject(GameObject gameObject, BreakDownDefinition objDef)
@@ -146,8 +185,6 @@ namespace RemoveClutter
             {
                 return;
             }
-
-            AddBreakDownComponent(gameObject, objDef);
             
             //Check if it has collider, add one if it doesn't
             Collider collider = gameObject.GetComponent<Collider>();
@@ -155,6 +192,18 @@ namespace RemoveClutter
             if (collider == null)
             {
                 collider = gameObject.GetComponentInChildren<Collider>();
+            }
+
+            if (gameObject.name.StartsWith("Decal-"))
+            {
+                gameObject.transform.localRotation = Quaternion.identity;
+                GameObject collisionObject = new GameObject("PaperDecalRemover-" + gameObject.name);
+                collisionObject.transform.parent = gameObject.transform.parent;
+                collisionObject.transform.position = gameObject.transform.position;
+
+                gameObject.transform.parent = collisionObject.transform;
+
+                gameObject = collisionObject;
             }
 
             if (collider == null)
@@ -165,7 +214,19 @@ namespace RemoveClutter
                 BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
                 boxCollider.size = bounds.size;
                 boxCollider.center = bounds.center - gameObject.transform.position;
+
+                /*if (gameObject.name.StartsWith("Decal-"))
+                {
+                    boxCollider.size = new Vector3(boxCollider.size.x, 0.01f, boxCollider.size.z);
+
+                    GameObject hint = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    hint.transform.parent = gameObject.transform;
+                    hint.transform.localScale = boxCollider.size;
+                    hint.transform.position = new Vector3(0,0,0);
+                }*/
             }
+
+            AddBreakDownComponent(gameObject, objDef);
 
             //Set children to interactive layer
             if (gameObject.transform.childCount > 0)

@@ -67,7 +67,7 @@ namespace RemoveClutter
 
         internal static void TimeUpdate()
         {
-            if (Input.GetKeyUp(KeyCode.F3))
+            if (InputManager.GetKeyDown(InputManager.m_CurrentContext, KeyCode.F3))
             {
                 GetObjectNameUnderPoint();
             }
