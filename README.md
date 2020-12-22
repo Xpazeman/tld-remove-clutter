@@ -10,6 +10,8 @@ This mods allows you to remove most of the clutter in TLD. In reality it's a sys
 * You'll need to download and install [ModSettings](https://github.com/zeobviouslyfakeacc/ModSettings/releases/download/v1.7/ModSettings.dll) by Zeo. **MOD WON'T WORK WITHOUT IT**
 * Download the latest version of RemoveClutter.zip from the [releases page](https://github.com/Xpazeman/tld-remove-clutter/releases/latest).
 * Extract RemoveClutter.zip into the Mods folder in your TLD install directory, you should have a folder name remove-clutter and RemoveClutter.dll in there
+* **IMPORTANT: DO NOT leave the .zip folder in the Mods folder as this will make Melon Loader error.**
+* **UPDATING**: Simply unzip the file in your mods folder and overwrite the old files. Remember to remove the .zip file from the folder.
 
 ## Mod Options
 In the Mod Options menu, you have four options:
