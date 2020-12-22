@@ -34,8 +34,12 @@ namespace RemoveClutter
 
                 RemoveClutter.sceneBreakDownData = saveGameFormat.m_BreakDownObjectsSerialized;
 
+                //Debug.Log(RemoveClutter.sceneBreakDownData);
+
                 RemoveClutter.PatchSceneObjects();
                 RemoveClutter.PatchSceneDecals();
+
+                BreakDown.DeserializeAllAdditive(RemoveClutter.sceneBreakDownData);
             }
         }
 

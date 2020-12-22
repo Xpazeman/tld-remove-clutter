@@ -123,7 +123,7 @@ namespace RemoveClutter
 
             Debug.Log("[remove-clutter] " + setupObjects + " objects setup for removal.");
 
-            BreakDown.DeserializeAllAdditive(sceneBreakDownData);
+            //BreakDown.DeserializeAllAdditive(sceneBreakDownData);
         }
 
         internal static void PatchSceneDecals()
@@ -138,11 +138,10 @@ namespace RemoveClutter
 
                 foreach (MeshRenderer renderer in allRenderers)
                 {
-                    if (renderer.gameObject.name.ToLower().Contains("decal"))
+                    if (renderer.gameObject.name.ToLower().Contains("decal-"))
                     {
                         renderer.receiveShadows = true;
                         qd_Decal decal = renderer.GetComponent<qd_Decal>();
-                        //Debug.Log("Decal " + renderer.gameObject.name + " layer" + decal.m_Layer + " texture:"+ decal.texture.name);
                         if (decal != null && (decal.texture.name.StartsWith("FX_DebrisPaper") || decal.texture.name.StartsWith("FX_DebrisMail") || decal.texture.name.StartsWith("FX_DebriPaper")))
                         {
                             
@@ -154,12 +153,15 @@ namespace RemoveClutter
                             };
 
                             PrepareGameObject(renderer.gameObject, bdDef);
+                            
                         }
 
                         continue;
                     }
                 }
             }
+
+            //BreakDown.DeserializeAllAdditive(sceneBreakDownData);
         }
 
         internal static void PrepareGameObject(GameObject gameObject, BreakDownDefinition objDef)
@@ -208,22 +210,11 @@ namespace RemoveClutter
 
             if (collider == null)
             {
-                //AddBreakDownComponent(gameObject, objDef);
                 Bounds bounds = renderer.bounds;
 
                 BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
                 boxCollider.size = bounds.size;
                 boxCollider.center = bounds.center - gameObject.transform.position;
-
-                /*if (gameObject.name.StartsWith("Decal-"))
-                {
-                    boxCollider.size = new Vector3(boxCollider.size.x, 0.01f, boxCollider.size.z);
-
-                    GameObject hint = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    hint.transform.parent = gameObject.transform;
-                    hint.transform.localScale = boxCollider.size;
-                    hint.transform.position = new Vector3(0,0,0);
-                }*/
             }
 
             AddBreakDownComponent(gameObject, objDef);

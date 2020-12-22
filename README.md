@@ -1,9 +1,13 @@
 # Remove Clutter
 This mods allows you to remove most of the clutter in TLD. In reality it's a system to add the break down functionality to almost any object through config files. It's possible to edit the added items properties (which tool can be used, if tools are required, how much time it takes, what sound it plays and what objects it yields), and also you can add your own.
 
+## Updates
+### v2.2
+* FIX: Fixed issue with paper decals not saved after being broken down.
+
 ## Installing the mod
 * If you haven't done so already, install MelonLoader by downloading and running [MelonLoader.Installer.exe](https://github.com/HerpDerpinstine/MelonLoader/releases/latest/download/MelonLoader.Installer.exe)
-* You'll need to download and install [ModSettings](https://github.com/zeobviouslyfakeacc/ModSettings/releases/download/v1.6/ModSettings.dll) by Zeo. **MOD WON'T WORK WITHOUT IT**
+* You'll need to download and install [ModSettings](https://github.com/zeobviouslyfakeacc/ModSettings/releases/download/v1.7/ModSettings.dll) by Zeo. **MOD WON'T WORK WITHOUT IT**
 * Download the latest version of RemoveClutter.zip from the [releases page](https://github.com/Xpazeman/tld-remove-clutter/releases/latest).
 * Extract RemoveClutter.zip into the Mods folder in your TLD install directory, you should have a folder name remove-clutter and RemoveClutter.dll in there
 
