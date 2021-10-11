@@ -1,5 +1,5 @@
 ﻿using System;
-using Harmony;
+using HarmonyLib;
 using System.Reflection;
 using System.Collections.Generic;
 using System.IO;
@@ -54,7 +54,6 @@ namespace RemoveClutter
                     try
                     {
                         fileObjs = JSON.Load(data).Make<List<BreakDownDefinition>>();
-                        
 
                         objList.AddRange(fileObjs);
 
@@ -134,7 +133,7 @@ namespace RemoveClutter
             {
                 MeshRenderer childRenderer = rootObj.GetComponent<MeshRenderer>();
                 MeshRenderer[] allRenderers = rootObj.GetComponentsInChildren<MeshRenderer>();
-                allRenderers.Add(childRenderer);
+                allRenderers.AddItem(childRenderer);
 
                 foreach (MeshRenderer renderer in allRenderers)
                 {
@@ -224,7 +223,8 @@ namespace RemoveClutter
             {
                 for (int i = 0; i < gameObject.transform.childCount; i++)
                 {
-                    RCUtils.SetLayer(gameObject.transform.GetChild(i).gameObject, vp_Layer.InteractiveProp);
+                    if (!gameObject.transform.GetChild(i).gameObject.name.StartsWith("Decal-"))
+                        RCUtils.SetLayer(gameObject.transform.GetChild(i).gameObject, vp_Layer.InteractiveProp);
                 }
             }
         }

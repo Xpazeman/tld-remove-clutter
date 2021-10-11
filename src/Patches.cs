@@ -1,5 +1,5 @@
 ﻿using System;
-using Harmony;
+using HarmonyLib;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -22,7 +22,7 @@ namespace RemoveClutter
         {
             public static void Postfix(SaveGameSystem __instance, string name, string sceneSaveName)
             {
-                if (InterfaceManager.IsMainMenuActive() || (GameManager.IsOutDoorsScene(GameManager.m_ActiveScene) && !RemoveClutter.notReallyOutdoors.Contains(GameManager.m_ActiveScene)))
+                if (InterfaceManager.IsMainMenuEnabled() || (GameManager.IsOutDoorsScene(GameManager.m_ActiveScene) && !RemoveClutter.notReallyOutdoors.Contains(GameManager.m_ActiveScene)))
                 {
                     Debug.Log("[remove-clutter] " + GameManager.m_ActiveScene + " is outdoor scene, mod disabled.");
                     return;

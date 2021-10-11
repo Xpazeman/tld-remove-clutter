@@ -2,6 +2,9 @@
 This mods allows you to remove most of the clutter in TLD. In reality it's a system to add the break down functionality to almost any object through config files. It's possible to edit the added items properties (which tool can be used, if tools are required, how much time it takes, what sound it plays and what objects it yields), and also you can add your own.
 
 ## Updates
+### v2.3
+* Updated to work with TLD 1.95 - Fury, then silence.
+
 ### v2.2
 * FIX: Fixed issue with paper decals not saved after being broken down.
 
