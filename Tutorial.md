@@ -124,7 +124,7 @@ You can make the item yield any other GEAR item you want. For this, you need the
 * Stick
 * Line
 
-You can use the dev console for a list of items, or use F3 on items in game to see their name. Wulfmarius has a list, and although it's not updated to latest version, it's good enough for most situations https://github.com/WulfMarius/ModComponent/wiki/Item-Names
+You can use the dev console for a list of items, or use F3 on items in game to see their name. You can get the gear names from the modding wiki: https://the-long-dark-modding.fandom.com/wiki/Gear_Name
 
 Yes, you can make a poster yield beefjerky when harvested if you want to.
 
